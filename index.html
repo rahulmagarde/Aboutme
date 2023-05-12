@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+      type="text/javascript"
+    ></script>
+
+    <link href="bootstrap.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+      //Reg Ex Declaration - Globaly.
+      var $FNameLNameRegEx = /^([a-zA-Z]{2,20})$/;
+      var $FullNameRegEx = /^([a-zA-Z ]{2,40})$/;
+      var $BankAccountNameRegEx = /^([a-zA-Z ]{2,60})$/;
+      var $PasswordRegEx =
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,12}$/;
+
+      var $EmailIdRegEx = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b$/i;
+      var $ConNoRegEx = /^([0-9]{10})$/;
+      var $AgeRegEx = /^([0-9]{1,2})$/;
+      var $AadhaarNoRegEx = /^([0-9]{12})$/;
+      var $GSTNoRegEx =
+        /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+      var $IndianDrivingLicenseNoRegEx = /^([A-Z]{2,3}[-/0-9]{8,13})$/;
+      var $IndianVehicleRegNoRegEx =
+        /^([A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{1,4})$/;
+      var $PincodeRegEx = /^[1-9][0-9]{5,6}$/;
+      var $PANNoRegEx = /^[A-Z]{3}[ABCFGHLJPT][A-Z][0-9]{4}[A-Z]$/;
+      var $IFSCCodeRegEx = /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/;
+      var $BankAccountNoRegEx = /^([0-9]{9,18})$/;
+      var $LatitudeLongitude =
+        /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,8})?|180(?:\.0{1,8})?)$/;
+
+      $(document).ready(function () {
+        $("#TxtFirstname").blur(function () {
+          $("#TxtFirstnameValidate").empty();
+          if ($(this).val().trim() == "" || $(this).val().trim() == null) {
+            $("#TxtFirstnameValidate").html("(*) Firstname required..!!");
+          } else {
+            if (!$(this).val().trim().match($FNameLNameRegEx)) {
+              $("#TxtFirstnameValidate").html("Invalid firstname..!!");
+            }
+          }
+        });
+
+        $("#TxtFirstname").keypress(function (e) {
+          var ASCIIValue = e.which,
+            Flag = false;
+
+          $("#TxtFirstnameValidate").empty();
+
+          (ASCIIValue >= 65 && ASCIIValue <= 90) ||
+          (ASCIIValue >= 97 && ASCIIValue <= 121)
+            ? (Flag = true)
+            : ($("#TxtFirstnameValidate").html("Invalid input..!!"),
+              (Flag = false));
+
+          return Flag;
+        });
+
+        $("#TxtLastname").keypress(function (e) {
+          var ASCIIValue = e.which,
+            Flag = false;
+
+          $("#TxtLastnameValidate").empty();
+
+          (ASCIIValue >= 65 && ASCIIValue <= 90) ||
+          (ASCIIValue >= 97 && ASCIIValue <= 121)
+            ? (Flag = true)
+            : ($("#TxtLastnameValidate").html("Invalid input..!!"),
+              (Flag = false));
+
+          return Flag;
+        });
+        $("#TxtLastname").blur(function () {
+          $("#TxtLastnameValidate").empty();
+          if ($(this).val().trim() == "" || $(this).val().trim() == null) {
+            $("#TxtLastnameValidate").html("(*) Lastname required..!!");
+          } else {
+            if (!$(this).val().trim().match($FNameLNameRegEx)) {
+              $("#TxtLastnameValidate").html("Invalid lastname..!!");
+            }
+          }
+        });
+
+        $("#TxtEmailid").blur(function () {
+          $("#TxtEmailidValidate").empty();
+          if ($(this).val().trim() == "" || $(this).val().trim() == null) {
+            $("#TxtEmailidValidate").html("(*) Email id required..!!");
+          } else {
+            if (!$(this).val().trim().match($EmailIdRegEx)) {
+              $("#TxtEmailidValidate").html("Invalid emailid..!!");
+            }
+          }
+        });
+
+        $("#TxtContactNo").keypress(function (e) {
+          var ASCIIValue = e.which,
+            Flag = false;
+
+          $("#TxtContactNoValidate").empty();
+
+          ASCIIValue >= 48 && ASCIIValue <= 57
+            ? (Flag = true)
+            : ($("#TxtContactNoValidate").html("Invalid input..!!"),
+              (Flag = false));
+
+          return Flag;
+        });
+
+        $("#TxtContactNo").blur(function () {
+          $("#TxtContactNoValidate").empty();
+          if ($(this).val().trim() == "" || $(this).val().trim() == null) {
+            $("#TxtContactNoValidate").html("(*) Contact no. required..!!");
+          } else {
+            if (!$(this).val().trim().match($ConNoRegEx)) {
+              $("#TxtContactNoValidate").html("Invalid contact no..!!");
+            }
+          }
+        });
+
+        var TxtFirstnameFlag = false,
+          TxtLastnameFlag = false,
+          TxtEmailidFlag = false,
+          TxtContactNoFlag = false;
+        $("#BtnCreateNewAccount").click(function () {
+          $("#TxtFirstnameValidate").empty();
+          if (
+            $("#TxtFirstname").val().trim() == "" ||
+            $("#TxtFirstname").val().trim() == null
+          ) {
+            $("#TxtFirstnameValidate").html("(*) Firstname required..!!");
+            TxtFirstnameFlag = false;
+          } else {
+            if (!$("#TxtFirstname").val().trim().match($FNameLNameRegEx)) {
+              $("#TxtFirstnameValidate").html("Invalid firstname..!!");
+              TxtFirstnameFlag = false;
+            } else {
+              TxtFirstnameFlag = true;
+            }
+          }
+
+          $("#TxtLastnameValidate").empty();
+          if (
+            $("#TxtLastname").val().trim() == "" ||
+            $("#TxtLastname").val().trim() == null
+          ) {
+            $("#TxtLastnameValidate").html("(*) Lastname required..!!");
+            TxtLastnameFlag = false;
+          } else {
+            if (!$("#TxtLastname").val().trim().match($FNameLNameRegEx)) {
+              $("#TxtLastnameValidate").html("Invalid lastname..!!");
+              TxtLastnameFlag = false;
+            } else {
+              TxtLastnameFlag = true;
+            }
+          }
+          $("#TxtEmailidValidate").empty();
+          if (
+            $("#TxtEmailid").val().trim() == "" ||
+            $("#TxtEmailid").val().trim() == null
+          ) {
+            $("#TxtEmailidValidate").html("(*) Email id required..!!");
+            TxtEmailidFlag = false;
+          } else {
+            if (!$("#TxtEmailid").val().trim().match($EmailIdRegEx)) {
+              $("#TxtEmailidValidate").html("Invalid emailid..!!");
+              TxtEmailidFlag = false;
+            } else {
+              TxtEmailidFlag = true;
+            }
+          }
+          $("#TxtContactNoValidate").empty();
+          if (
+            $("#TxtContactNo").val().trim() == "" ||
+            $("#TxtContactNo").val().trim() == null
+          ) {
+            $("#TxtContactNoValidate").html("(*) Contact no. required..!!");
+            TxtContactNoFlag = false;
+          } else {
+            if (!$("#TxtContactNo").val().trim().match($ConNoRegEx)) {
+              $("#TxtContactNoValidate").html("Invalid contact no..!!");
+              TxtContactNoFlag = false;
+            } else {
+              TxtContactNoFlag = true;
+            }
+          }
+
+          if (
+            TxtFirstnameFlag == true &&
+            TxtLastnameFlag == true &&
+            TxtEmailidFlag == true &&
+            TxtContactNoFlag == true
+          ) {
+            alert("Form Submitted Successfully..!!");
+          } else {
+            alert("Invalid Form Inputs..!!");
+          }
+        });
+      });
+    </script>
+    <style type="text/css">
+      nav {
+        z-index: 1;
+      }
+
+      .bg-light {
+        background-color: #01080c !important;
+      }
+
+      .navbar-brand,
+      .nav-item {
+        color: white !important;
+        
+      }
+
+      /* .container-fluid{
+      position: relative;
+    } */
+
+      .row {
+        position: relative;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-size: cover;
+        max-width: 100%;
+        margin: 0%;
+        z-index: -1;
+      }
+
+      .video_bg {
+        height: 100%;
+        width: 100%;
+      }
+
+      #index {
+        position: absolute;
+        /* border: 2px solid black; */
+        height: 500px;
+        width: 450px;
+        margin-left: 400px;
+        margin-top: 60px;
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 30px rgb(148, 151, 219);
+      }
+
+      .img_b {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+
+      #img_rt {
+        border: 6px solid white;
+        box-shadow: 0 0 30px grey;
+        border-radius: 15px;
+        width: 200px;
+        height: 250px;
+        /* margin-left: 30px;
+      margin-top: 25px; */
+      }
+
+      .text {
+        width: 100%;
+        height: 200px;
+        color: aliceblue;
+        margin-top: 25px;
+      }
+
+      h2 {
+        color: aliceblue;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        text-align: center;
+      }
+
+      .text_1 {
+        font-size: 10px;
+      }
+
+      /* .fa {
+      border: 2px solid yellow;
+      flex-flow: row;
+      flex-wrap: wrap;
+    } */
+
+      #i3 {
+        display: flex;
+        justify-content: center;
+      }
+
+      hr {
+        background-color: aliceblue;
+      }
+
+      .text_12 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .text_13 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .img_bg {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        z-index: -1;
+      }
+
+      .img_tr {
+        max-width: 100%;
+      }
+
+      .box_2 {
+        position: absolute;
+        width: 500px;
+        height: 600px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        top: 100px;
+        left: 50px;
+      }
+
+      .img_bg_1 {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        z-index: -1;
+      }
+
+      .box_3 {
+        position: absolute;
+        width: 500px;
+        height: 600px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        top: 100px;
+        right: 70px;
+      }
+
+      .edu_text {
+        margin-top: 20px;
+      }
+      .head {
+        text-align: center;
+        color: white;
+      }
+      #summary {
+        height: auto;
+        padding-bottom: 40px;
+        color: #fff;
+        background-attachment: fixed;
+        background-image: url("laptop.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-bottom: 40px;
+        padding-top: 7%;
+        font-size: 20px;
+        line-height: 1.5;
+        font-family: cursive;
+      }
+      #summary h4 {
+        font-family: cursive;
+        padding: 2%;
+      }
+      #Qualifications {
+        background-image: url("wom1.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+      }
+      #QualificationsRow div.col-lg-offset-1 {
+        padding: 10px;
+        background-color: rgba(101, 122, 192, 0.8);
+        border-radius: 8px;
+        box-shadow: 0px 0px 18px rgb(229, 102, 11);
+      }
+      #Qualifications table {
+        width: 100%;
+        margin-top: 50px;
+      }
+      #Qualifications table tr td {
+        padding-bottom: 20px;
+      }
+      #Qualifications table tr td:first-child {
+        width: 30%;
+        padding-left: 10px;
+      }
+
+      #Skills {
+        background-attachment: fixed;
+        background-image: url("work1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-size: 20px;
+        padding-bottom: 40px;
+        color: #000000;
+        z-index: -1;
+      }
+      #SkillsRow {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-left: 30px;
+      }
+      #SkillsRow div.col-lg-offset-5 {
+        padding: 10px;
+        background-color: #2c6fb2;
+        border-radius: 8px;
+        box-shadow: 0px 0px 18px rgb(242, 97, 7);
+        opacity: 0.8;
+      }
+      #Skills table {
+        width: 100%;
+        margin-top: 50px;
+      }
+      #Skills table tr td {
+        padding-bottom: 20px;
+      }
+      #Skills table tr td:first-child {
+        width: 30%;
+        padding-left: 10px;
+      }
+      .row {
+        padding-left: 10px;
+      }
+      #CNAForm {
+        box-shadow: 0px 0px 3px rgb(179, 34, 90);
+        margin-top: 40px;
+        margin-bottom: 40px;
+        color: gray;
+      }
+      i.fa,
+      b {
+        color: blueviolet;
+        box-shadow: darkmagenta;
+      }
+
+      #CNAForm {
+        box-shadow: 0px 0px 3px Gray;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        color: gray;
+      }
+      i.fa,
+      b {
+        color: teal;
+      }
+
+      .container-fluid {
+        background-image: url(form2.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .text-cent {
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="containe-fluid">
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbarScroll" style="margin-bottom: 0px; position: fixed;">
+        <a class="navbar-brand" href="contact.html">Rahul Magarde</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="nav-item nav-link active" href="#"
+              >Home<span class="sr-only">(current)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a
+            >
+            <a class="nav-item nav-link" href="#summary">Technical Summary</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="nav-item nav-link" href="#Qualifications"
+              >Qualification</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="nav-item nav-link" href="#Skills">Skills</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <a class="nav-item nav-link" href="#SignIn">Sign In</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+      </nav>
+
+
+      <div class="row">
+        <video
+          src="Business_Professionals_and_Corporate_Stock_Video_Footage_by_FILMPAC(480p).mp4"
+          autoplay
+          muted
+          loop
+          class="video_bg"
+        ></video>
+        <div
+          class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4"
+          id="index"
+        >
+          <div class="img_b">
+            <img
+              src="WhatsApp Image 2023-02-01 at 12.26.42 PM (2).jpeg"
+              id="img_rt"
+            />
+          </div>
+
+          <div class="text">
+            <h2>Rahul Magarde</h2>
+            <hr />
+            <div class="text_1">
+              <div class="text_12">
+                <div class="fa fa-envelope" id="i1">
+                  Rahulmagarde9@gmail.com
+                </div>
+              </div>
+              <hr />
+              <div class="text_13">
+                <div class="fa fa-phone" id="i2">7879292078</div>
+              </div>
+              <hr />
+              <div class="fa fa-location" id="i3">Vadodara,Gujrat India</div>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <div id="summary">
+          <div class="head">
+            <div
+              class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-10 col-md-10 col-sm-10"
+            >
+              <h4>Technical Summary</h4>
+
+              <ul>
+                <li>
+                  I Have completed my Diploma in Electrical and Electronics from Rajiv Gandhi University, Bhopal
+                  (2022)
+                  
+                </li>
+                <li>
+                  In 2019 I have completed my Bachelor of Administration from MP Bhoj University Bhopal
+                </li>
+                <li>
+                 I'm searching for Database jobs near my location, which is Vadodara. 
+                 I' have done certification in oracle cloud infrastructure associate.
+                 
+                </li>
+                <li>
+                  Also aware and working with latest cross platform mobile
+                  application development framework. I specifically work on
+                 Visual Studio for html, and Used SQL server for SQL. 
+                </li>
+
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="Qualifications" class="container-fluid">
+          <div class="row" id="QualificationsRow">
+            <div
+              class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-6 col-md-6 col-sm-6 wow slideInLeft"
+              data-wow-duration="3s"
+            >
+              <br />
+              <h2 class="text-center">
+                <i class="fa fa-object-group"></i> Education Qualification
+              </h2>
+              <hr />
+              <table class="table table-responsive">
+                <tr>
+                  <td>Year<br />2019 - 2022</td>
+                  <td>
+                    Diploma in Electrical & Electronic (2022)<br />
+                    from SAM college Bhopal <br />
+                    Ragiv Gandhi University 
+                  </td>
+                </tr>
+                <tr>
+                  <td>Year<br />2016- 2019</td>
+                  <td>
+                    Bachelor of Administration (2019)<br />
+                    from MP Bhoj University, Bhopal <br />
+                    
+                    (Throughout First Class with Distinction).
+                  </td>
+                </tr>
+                <tr>
+                  <td>Year<br />2016 - 2018</td>
+                  <td>
+                    ITI  <br />from Govt. Mini ITI  
+                    Ghansore,<br />
+                    NCVT University.<br />
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>Year<br />2015 - 2016</td>
+                  <td>
+                    Higher Secondary   <br />
+                    from Govt. Boys H.S.S Shahpur<br />
+                    M.P board.
+                    
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td>Year<br />2013 - 2014</td>
+                  <td>
+                    High Secondary School  <br />
+                    from Govt. Boys H.S.S Shahpur<br />
+                    M.P board.
+                    
+                    
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="Skills" class="container-fluid">
+          <div class="row" id="SkillsRow">
+            <div
+              class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-lg-6 col-md-6 col-sm-6 wow slideInRight"
+              data-wow-duration="3s"
+            >
+              <center>
+                <br />
+                <h2><i class="fa fa-object-group"></i> Technical Skills</h2>
+                <hr />
+              </center>
+              <table>
+                <tr>
+                  <td>Programming Knowledge:</td>
+                  <td>Html, CSS, Oracle cloud Associate certified , Router Configration, Static IP</td>
+                </tr>
+                <tr>
+                  <td>Tools & Technologies:</td>
+                  <td> Microsoft Azure, AWS, Github</td>
+                </tr>
+                <tr>
+                  <td>Databases:</td>
+                  <td>Microsoft SQL Server</td>
+                </tr>
+                <tr>
+                  <td>Operating Systems:</td>
+                  <td>Microsoft Windows, Linux</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="SignIn" class="container-fluid">
+      <div class="rows">
+        <div
+          class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4"
+          id="CNAForm"
+        >
+          <h3 class="text-cent">
+            <i class="fa fa-users"></i> Create New Account
+            <hr />
+          </h3>
+          <div class="form-group">
+            <b>Firstname:</b>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input
+                type="text"
+                id="TxtFirstname"
+                placeholder="Enter firstname here.."
+                maxlength="20"
+                class="form-control"
+              />
+            </div>
+            <small class="text-danger" id="TxtFirstnameValidate"></small>
+          </div>
+          <div class="form-group">
+            <b>Lastname:</b>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input
+                type="text"
+                id="TxtLastname"
+                placeholder="Enter lastname here.."
+                maxlength="20"
+                class="form-control"
+              />
+            </div>
+            <small class="text-danger" id="TxtLastnameValidate"></small>
+          </div>
+          <div class="form-group">
+            <b>Email Id:</b>
+            <div class="input-group">
+              <span class="input-group-addon"
+                ><i class="fa fa-envelope"></i
+              ></span>
+              <input
+                type="text"
+                id="TxtEmailid"
+                placeholder="Enter email id here.."
+                maxlength="50"
+                class="form-control"
+              />
+            </div>
+            <small class="text-danger" id="TxtEmailidValidate"></small>
+          </div>
+          <div class="form-group">
+            <b><i class="fa fa-phone"></i> Contact No.:</b>
+            <div class="input-group">
+              <span class="input-group-addon">+91</span>
+              <input
+                type="text"
+                id="TxtContactNo"
+                placeholder="Enter contact no. here.."
+                maxlength="10"
+                class="form-control"
+              />
+            </div>
+            <small class="text-danger" id="TxtContactNoValidate"></small>
+          </div>
+          <div class="form-group">
+            <b>Gender:</b>
+            <div class="input-group">
+              <span class="input-group-addon"
+                ><i class="fa fa-male"></i> | <i class="fa fa-female"></i>
+              </span>
+              <select id="DDL_Gender" class="form-control">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <a class="btn btn-primary" id="BtnCreateNewAccount"
+              ><i style="color: white" class="fa fa-user-plus"></i> Submit</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  </body>
+</html>

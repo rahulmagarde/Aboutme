@@ -1,0 +1,165 @@
+* {
+   
+    margin: 0px;
+    padding: 0px;
+  
+    box-sizing: border-box;
+   
+  }
+  nav{
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0px 100px;
+    position: fixed;
+    background-image: linear-gradient(#051d24, #012733);
+
+  }
+  nav .logo p{
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    color: rgb(250, 251, 252);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+  }
+  nav ul{
+    float: right;
+ 
+
+  }
+  nav li{
+    display: inline-block;
+    list-style: none;
+  }
+  nav li a{
+    font-size: 18px;
+    text-transform: uppercase;
+    padding:0px 30px;
+    color: white !important;
+    text-decoration: none;
+  }
+  nav li a:hover{
+    color: #2ad574;
+    transition: all 0.4s ease 0s;
+  }
+  
+  video {
+    width: 100%;
+    height: auto;
+   
+  }
+ 
+
+/*.form{
+  width: 350px;
+  height: 450px;
+  background-color: rgba(41, 39, 39, 0.3);
+  box-shadow: 0 5px 30px black;
+  justify-content: center;
+}
+*/
+
+#index {
+  position: absolute;
+  /* border: 2px solid black; */
+  height: 500px;
+  width: 450px;
+  margin-left: 400px;
+  margin-top: 70px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 30px rgb(148, 151, 219);
+}
+
+.img_b {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+#img_rt{
+  border: 6px solid white;
+  box-shadow: 0 0 30px grey;
+  border-radius: 15px;
+  width: 200px;
+  height: 250px;
+  /* margin-left: 30px;
+  margin-top: 25px; */
+}
+
+.text {
+  width: 100%;
+  height: 200px;
+  color: aliceblue;
+  margin-top: 25px;
+}
+
+h2 {
+  color: aliceblue;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+.text_1 {
+  font-size: 10px;
+}
+
+#i3 {
+  display: flex;
+  justify-content: center;
+}
+
+hr {
+  background-color: aliceblue;
+}
+
+.text_12{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.img_bg{
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  z-index: -1;
+  
+}
+
+.img_tr{
+  max-width: 100%;
+}
+
+.box_2{
+  position: absolute;
+  width: 500px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  top: 100px;
+  left: 50px;
+}
+
+.img_bg_1{
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  z-index: -1;
+}
+
+.box_3{
+  position: absolute;
+  width: 500px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  top: 100px;
+  right: 70px;
+}
+
+.edu_text{
+  margin-top: 20px;
+}
